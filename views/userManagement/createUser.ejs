@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=locals.title%></title>
+    <link rel="stylesheet" href="/static/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/cssbootstrap.min.css/font-awesome.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> -->
+  </head>
+  <body>
+    <div class="login-page" style="text-align: center">
+      <h2>create user</h2>
+      <div class="form">
+        <form
+          class="login-form"
+          action="/admin/adduser"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="return validateForm()"
+        >
+          <% if (locals.error) { %>
+          <div class="alert alert-danger" role="alert"><%= error%></div>
+          <% } %>
+          <input
+            required
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Username"
+          />
+          <input required type="email" name="email" placeholder="Email" />
+          <input
+            required
+            type="tel"
+            name="number"
+            id="number"
+            placeholder="Number"
+            pattern="[1-9][0-9]{9}"
+            title="Please enter a valid 10-digit phone number"
+          />
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="Password"
+            minlength="8"
+            title="Password must be at least 8 characters long"
+          />
+          <input
+            required
+            type="file"
+            name="avatar"
+            accept="image/*"
+            placeholder="Image"
+            title="Please select an image file"
+            onchange="previewImage(this)"
+          />
+          <img
+            id="imagePreview"
+            class="rounded-circle"
+            src="/uploads/profiler.png"
+            width="40"
+            height="40"
+            alt="Profile Image"
+          />
+          <button type="submit">Add user</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    function validateForm() {
+      var name = document.getElementById("name").value.trim();
+      var number = document.getElementById("number").value.trim();
+       console.log("nn",name);
+      if (name === "") {
+        console.log("hgjh");
+        alert("Please enter a valid username.");
+        return false;
+      }
+
+      if (parseInt(number) === 0) {
+        alert("Please enter a valid phone number.");
+        return false;
+      }
+
+      return true;
+    }
+    function previewImage(input) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var imagePreview = document.getElementById("imagePreview");
+        imagePreview.src = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  </script>
+</html>

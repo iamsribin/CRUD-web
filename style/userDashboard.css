@@ -1,0 +1,48 @@
+body {
+    background-color: #0097A7;
+}
+.user-page {
+    width: 500px;
+    padding: 10% 0 0;
+    margin: auto;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    max-width: 500px;
+    margin: 0 auto 100px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(255, 0, 0, 0.2), 0 5px 5px 0 rgba(255, 0, 0, 0.24);
+}
+.form h3 {
+    font-family: 'lobster', cursive;
+    font-size: 48px;
+    text-align: center;
+    padding: 5px;
+}
+.form input {
+    font-family: sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 26px;
+    text-align: center;
+    font-family: 'Bitter', sans-serif;
+}
+.form button {
+    font-family: 'Oswald', sans-serif;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    font-size: 26px;
+    background-color: #00838F;
+    padding: 15px;
+    text-transform: uppercase;
+    color: #FAFAFA;
+}

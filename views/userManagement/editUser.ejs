@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=locals.title%></title>
+    <link rel="stylesheet" href="/static/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/bootstrap.min.css/font-awesome.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> -->
+  </head>
+  <body>
+    <div class="login-page" style="text-align: center;">
+      <h2>Edit user <%= user.name%></h2>
+      <div class="form">
+        <form
+          class="login-form"
+          action="/admin/Edit/<%=user._id%>"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="return validateForm()"
+        >
+          <% if (locals.error) { %>
+          <div class="alert alert-danger" role="alert"><%= error%></div>
+          <% } %>
+          <input
+            required
+            type="text"
+            value="<%= user.name %>"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Username"
+          />
+          <input
+            required
+            type="email"
+            value="<%= user.email %>"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            required
+            type="tel"
+            value="<%= user.number %>"
+            name="number"
+            placeholder="Number"
+            pattern="[1-9][0-9]{9}"
+            title="Please enter a valid 10-digit phone number"
+          />
+          <input
+            type="file"
+            name="avatar"
+            accept="image/*"
+            placeholder="Image"
+            title="Please select an image file"
+            onchange="previewImage(event)"
+          />
+          <img
+            id="imagePreview"
+            class="rounded-circle"
+            src="/<%= user.image %>"
+            width="40"
+            height="40"
+            alt="Profile Image"
+          />
+          <input type="hidden" name="old_img" value="<%= user.image %>" />
+          <button type="submit">Add user</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      function validateForm() {
+        var name = document.getElementById("name").value.trim();
+        var number = document.getElementById("number").value.trim();
+console.log("name",name);
+        if (name === "" || /^\s*$/.test(name)) {
+console.log("name",name);
+
+          alert("Please enter a valid username.");
+          return false;
+        }
+
+        if (parseInt(number) === 0) {
+          alert("Please enter a valid phone number.");
+          return false;
+        }
+
+        return true;
+      }
+
+      function previewImage(event) {
+        const preview = document.getElementById("imagePreview");
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+          preview.src = reader.result;
+        };
+
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          preview.src = "<%= user.image %>";
+        }
+      }
+    </script>
+  </body>
+</html>
+

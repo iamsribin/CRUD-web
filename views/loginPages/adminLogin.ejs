@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=locals.title%></title>
+    <link rel="stylesheet" href="/static/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/cssbootstrap.min.css/font-awesome.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"> -->
+  </head>
+  <body>
+    <div class="login-page" style="text-align: center;">
+      <h2>Admin login</h2>
+        <div class="form">                  
+          <form class="login-form" action="/admin/adminSignup" method="post">
+            <% if (locals.error) { %>
+              <div class="alert alert-danger" role="alert"><%= error%></div>
+              <% } %>    
+            <input required type="text" name="name" placeholder="Name"/>
+            <input required type="password" name="password" placeholder="Password"/>
+            <button type="submit">login</button>
+          </form>
+        </div>
+      </div>
+  </body>
+</html>
+
+
+
